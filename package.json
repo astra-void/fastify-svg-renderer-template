@@ -1,0 +1,30 @@
+{
+  "name": "fastify-svg-renderer-template",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "dev": "cross-env LOCAL_DEV=1 NODE_ENV=development tsx src/index.ts",
+    "build": "esbuild src/index.ts --bundle --platform=node --format=cjs --target=node24 --outdir=dist --sourcemap",
+    "build:watch": "esbuild src/index.ts --bundle --platform=node --format=cjs --target=node24 --outdir=dist --sourcemap --watch",
+    "start": "node dist/index.js",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "clean": "rimraf dist",
+    "lint": "biome check .",
+    "format": "biome format --write .",
+    "check": "biome check . && tsc -p tsconfig.json --noEmit"
+  },
+  "license": "MIT",
+  "packageManager": "pnpm@10.29.3",
+  "dependencies": {
+    "@fastify/aws-lambda": "^6.4.0",
+    "fastify": "^5.7.4",
+    "preact": "^10.28.3",
+    "preact-render-to-string": "^6.6.5"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.4.2",
+    "@types/node": "^25.2.3",
+    "esbuild": "^0.27.3",
+    "typescript": "^5.9.3"
+  }
+}
