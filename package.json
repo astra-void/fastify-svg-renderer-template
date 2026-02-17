@@ -6,6 +6,7 @@
 		"dev": "LOCAL_DEV=1 NODE_ENV=development tsx src/index.ts",
 		"build": "esbuild src/index.ts --bundle --platform=node --format=cjs --target=node24 --minify --outdir=dist --sourcemap",
 		"build:watch": "esbuild src/index.ts --bundle --platform=node --format=cjs --target=node24 --minify --outdir=dist --sourcemap --watch",
+		"zip": "pnpm run build && cd dist && tar -a -c -f ../function.zip index.js",
 		"start": "node dist/index.js",
 		"typecheck": "tsc -p tsconfig.json --noEmit",
 		"clean": "rimraf dist",
