@@ -36,7 +36,11 @@ export function sendSvg(
 	setCors(reply);
 
 	if (inm && inm === etag) {
-		return reply.code(304).header("ETag", `"${etag}"`).header("Cache-Control", cc).send();
+		return reply
+			.code(304)
+			.header("ETag", `"${etag}"`)
+			.header("Cache-Control", cc)
+			.send();
 	}
 
 	return reply

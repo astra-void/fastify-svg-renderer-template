@@ -1,9 +1,9 @@
 import type { FastifyInstance } from "fastify";
 import type { RawQuery } from "../server/endpoint";
-import { endpoints } from "../svg/endpoints";
 import { asRawQuery, resolveSeed } from "../server/query";
 import { renderSvgXml } from "../server/render";
 import { sendSvg, setCors } from "../server/replySvg";
+import { endpoints } from "../svg/endpoints";
 
 export function registerSvgRoutes(app: FastifyInstance) {
 	app.options("/*", async (_req, reply) => {
@@ -24,14 +24,22 @@ export function registerSvgRoutes(app: FastifyInstance) {
 	});
 
 	for (const e of endpoints) {
-		app.get<{ Querystring: RawQuery }>(`/v1/svg/${e.kind}.svg`, async (req, reply) => {
-			const raw = asRawQuery(req.query);
-			const seed = resolveSeed(e.kind, raw);
-			const parsed = e.parse(raw);
-			const xml = renderSvgXml(
-				e.render(parsed, { kind: e.kind, seed, now: new Date(), rawQuery: raw }),
-			);
-			return sendSvg(req, reply, xml, e.cache);
-		});
+		app.get<{ Querystring: RawQuery }>(
+			`/v1/svg/${e.kind}.svg`,
+			async (req, reply) => {
+				const raw = asRawQuery(req.query);
+				const seed = resolveSeed(e.kind, raw);
+				const parsed = e.parse(raw);
+				const xml = renderSvgXml(
+					e.render(parsed, {
+						kind: e.kind,
+						seed,
+						now: new Date(),
+						rawQuery: raw,
+					}),
+				);
+				return sendSvg(req, reply, xml, e.cache);
+			},
+		);
 	}
 }

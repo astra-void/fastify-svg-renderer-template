@@ -1,5 +1,5 @@
-import type { RawQuery, RawQueryValue } from "./endpoint";
 import { clampInt, hashToSeed } from "../utils";
+import type { RawQuery, RawQueryValue } from "./endpoint";
 
 export function asRawQuery(q: unknown): RawQuery {
 	if (!q || typeof q !== "object") return {};

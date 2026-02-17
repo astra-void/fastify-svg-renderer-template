@@ -5,7 +5,8 @@ const app = buildApp();
 export const handler = awsLambdaFastify(app);
 
 const isLambda =
-	Boolean(process.env.AWS_LAMBDA_FUNCTION_NAME) || Boolean(process.env.LAMBDA_TASK_ROOT);
+	Boolean(process.env.AWS_LAMBDA_FUNCTION_NAME) ||
+	Boolean(process.env.LAMBDA_TASK_ROOT);
 
 if (!isLambda && process.env.LOCAL_DEV === "1") {
 	const port = Number(process.env.PORT ?? 3000);

@@ -22,14 +22,12 @@ export const exampleEndpoint = defineSvgEndpoint({
 	}),
 
 	render: (q) =>
-		h(ExampleSvg, { 
+		h(ExampleSvg, {
 			title: q.title,
 			value: q.value,
 			width: q.width,
 			height: q.height,
 		}),
 
-	examples: [
-		"/v1/svg/example.svg?title=Hello&value=123&w=420&h=160",
-	],
+	examples: ["/v1/svg/example.svg?title=Hello&value=123&w=420&h=160"],
 });
