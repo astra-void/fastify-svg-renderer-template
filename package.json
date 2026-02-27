@@ -3,28 +3,27 @@
 	"version": "1.0.0",
 	"description": "",
 	"scripts": {
-		"dev": "LOCAL_DEV=1 NODE_ENV=development tsx src/index.ts",
+		"dev": "tsx src/index.ts",
 		"build": "esbuild src/index.ts --bundle --platform=node --format=cjs --target=node24 --minify --outdir=dist --sourcemap",
 		"build:watch": "esbuild src/index.ts --bundle --platform=node --format=cjs --target=node24 --minify --outdir=dist --sourcemap --watch",
 		"zip": "pnpm run build && cd dist && tar -a -c -f ../function.zip index.js",
 		"start": "node dist/index.js",
 		"typecheck": "tsc -p tsconfig.json --noEmit",
 		"clean": "rimraf dist",
-		"lint": "biome check . --write",
-		"format": "biome format --write .",
-		"check": "biome check . && tsc -p tsconfig.json --noEmit"
+		"lint": "biome check .",
+		"lint:fix": "biome check . --fix --unsafe"
 	},
 	"license": "MIT",
 	"packageManager": "pnpm@10.29.3",
 	"dependencies": {
 		"@fastify/aws-lambda": "^6.4.0",
 		"fastify": "^5.7.4",
-		"preact": "^10.28.3",
-		"preact-render-to-string": "^6.6.5"
+		"preact": "^10.28.4",
+		"preact-render-to-string": "^6.6.6"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "2.4.2",
-		"@types/node": "^25.2.3",
+		"@biomejs/biome": "2.4.4",
+		"@types/node": "^25.3.2",
 		"esbuild": "^0.27.3",
 		"tsx": "^4.21.0",
 		"typescript": "^5.9.3"
